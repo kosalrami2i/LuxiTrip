@@ -38,4 +38,6 @@ public interface StopService {
      * @throws CustomException - carry message for the exception
      */
     public List<Stop> retrieveAllStops() throws CustomException;
+    
+   
 }
