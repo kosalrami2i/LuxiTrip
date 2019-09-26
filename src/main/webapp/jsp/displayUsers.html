@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="displayUsers.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div>
+      <c:forEach var="user" items="${users}">
+        <div class="divbox">
+          <fieldset class="divfieldset">
+            <legend class="divfieldsetlegend">
+              <i class="fa fa-user-circle-o"></i>
+            </legend>
+            <table cellpadding="5px" class="allemployee">
+              <tr>
+                <td>Id</td>
+                <td>
+                  <c:out value="${user.id}" />
+                </td>
+              <tr>
+              <tr>
+                <td>Name</td>
+                <td>
+                  <c:out value="${user.name}" />
+                </td>
+              </tr>
+              <tr>
+              <td>Role</td>
+              <td>
+                <c:out value="${user.designation}" />
+              </td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>
+                  <c:out value="${user.mobileNumber}" />
+                </td>
+              </tr>
+            </table>
+            <form action="displayEmployees" method="get">
+              <center>
+                <td> <input type="hidden" name="id" value= "${employee.id}" /></td>
+                <button type="submit" value="delete" target="_self" class="button remove" >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button type="submit" value ="search" target="_self" class="button update" >
+                  <i class="fa fa-pencil-square-o"></i></button>
+                <button type="submit" value="display" target="_self" class="button display">
+                  <i class="fa fa-eye"></i></button>
+              </center>
+            </form>
+        </div>
+        </fieldset>
+      </c:forEach>
+    </div>
+  </body>
+</html>
