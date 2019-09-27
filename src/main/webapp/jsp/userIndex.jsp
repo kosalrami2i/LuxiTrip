@@ -36,20 +36,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 2 <span              class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
+    </ul>
     </ul>
     <ul class="nav navbar-nav navbar-right">
      <li><a href="#" onClick="openForm()"><span class="glyphicon glyphicon-user"></span> profile</a></li>
@@ -67,7 +54,7 @@
     <form:input type="tel" value="${user.number}" path="number"/>
     <label><b>Email</b></label>
     <form:input type="email" value="${user.emailId}" path="emailId" /> 
-    
+    <form:input type="hidden" value="${user.role}" path="role"/>
     <button type="submit" class="btn">Edit</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form:form>
@@ -89,19 +76,31 @@ function closeForm() {
             <div class="container">
                <div class="row">
                   <div class="booking-form">
-                     <form>
+                     <form method="post" action="getSchedules">
                         <div class="row no-margin">
                            <div class="col-md-3">
                               <div class="form-group">
                                  <span class="form-label">Source</span>
-                                 <input class="form-control" type="text" placeholder="From:">
+                                 <select name = "source">
+                                 <c:forEach var="stop" items="${stops}">
+                    				       <option value="${stop.id}">
+                        			      <c:out value="${stop.name}"/>
+                                    </option>
+                                 </c:forEach>
+                                 </select>
                               </div>
                            </div>
                            <div class="row no-margin">
                            <div class="col-md-3">
                               <div class="form-group">
                                  <span class="form-label">Destination</span>
-                                 <input class="form-control" type="text" placeholder="To:">
+                                 <select name = "destination">
+                                 <c:forEach var="stop" items="${stops}">
+                    				       <option value="${stop.id}">
+                        			      <c:out value="${stop.name}"/>
+                                    </option>
+                                 </c:forEach>
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-6">
@@ -109,13 +108,13 @@ function closeForm() {
                                  <div class="col-md-5">
                                     <div class="form-group">
                                        <span class="form-label">ONWARD DATE</span>
-                                       <input class="form-control" type="date" required>
+                                       <input class="form-control" type="date" >
                                     </div>
                                  </div>
                                  <div class="col-md-5">
                                     <div class="form-group">
                                        <span class="form-label">RETURN DATE</span>
-                                       <input class="form-control" type="date" required>
+                                       <input class="form-control" type="date">
                                     </div>
                                  </div>
                                  <div class="col-md-2">

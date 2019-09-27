@@ -3,6 +3,7 @@ package com.ideas2it.luxitrip.dao;
 import java.util.List;
 
 import com.ideas2it.luxitrip.exception.CustomException;
+import com.ideas2it.luxitrip.model.Midway;
 import com.ideas2it.luxitrip.model.Stop;
 
 public interface StopDao {
@@ -36,5 +37,5 @@ public interface StopDao {
      * @throws UserException - carry message for the exception
      */
     public List<Stop> getAllStops() throws CustomException;
-
+    
 }
