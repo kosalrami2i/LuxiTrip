@@ -5,14 +5,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.cfg.Configuration;
+import org.hibernate.HibernateException; 
+import org.hibernate.query.Query;
+import org.hibernate.Session; 
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ideas2it.luxitrip.dao.IBusDao;
+import com.ideas2it.luxitrip.dao.BusDao;
 import com.ideas2it.luxitrip.exception.CustomException;
 import com.ideas2it.luxitrip.model.Bus;
 import com.ideas2it.luxitrip.model.Seat;
-import com.ideas2it.luxitrip.util.HibernateUtil;
+import com.ideas2it.luxitrip.model.User;
 
 @Repository
 public class BusDaoImpl implements BusDao{
@@ -35,13 +42,8 @@ public class BusDaoImpl implements BusDao{
             if (transact!=null) {
                 transact.rollback();
             }
-            throw new CustomException("Bus already Exists" + exception);
-        } catch (PersistenceException exception) {
-            if (transact!=null) {
-                transact.rollback();
-            }
             throw new CustomException("Unable to add Bus " + exception);
-        }  finally {
+        } finally {
             try {
                 session.close();
             } catch (Exception e) {
@@ -51,11 +53,10 @@ public class BusDaoImpl implements BusDao{
         return busId;
     }
     
-    @SuppressWarnings("unchecked")
     public List<Bus> getAllBuses() throws CustomException {
     	Session session = sessionFactory.openSession();
     	try {
-            return (session.createQuery("FROM Bus").list()); 
+            return (session.createQuery("from Bus", Bus.class).list());
     	} catch (HibernateException exception) {
             throw new CustomException("Unable to get Bus" + exception);
         } finally {

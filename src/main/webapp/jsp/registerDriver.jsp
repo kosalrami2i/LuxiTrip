@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Driver</title>
-    <link rel = "icon" href = "4339.png" style = "width:100px">
+    <title>Travel Booking Form</title>
     <link rel="stylesheet" href="../css/registerDriver.css">
   </head>
   <body>
     <div class="testbox">
-    <form action="registerBus" method="get">
+    <form action="registerUser" method="post">
       <div class="banner">
         <h1>Driver Registration Form</h1>
       </div>
       <div class="item">
         <p>Name</p>
         <div class="name-item">
-          <input type="text" name="name" placeholder="" />
+          <input type="text" name="name" placeholder="Enter Name"/>
         </div>
       </div>
       <div class="item">
         <p>Mobile Number</p>
       <div class="name-item">
-        <input type="tel" name="capacity"/>
+        <input type="tel" name="number"/>
       </div>
       </div>
       <div class="item">
         <p>Email</p>
       <div class="name-item">  
-        <input type="email" name="email"/>
+        <input type="email" name="emailId"/>
       </div>
+      <input type="hidden" value="Driver" name="role"/>
+      <input type="hidden" value="driver" name="password"/>
        <div class="question">
         <p>Gender</p>
         <div class="question-answer">

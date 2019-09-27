@@ -4,16 +4,17 @@ import java.util.List;
 
 import com.ideas2it.luxitrip.exception.CustomException;
 import com.ideas2it.luxitrip.model.Stop;
+import com.ideas2it.luxitrip.service.StopService;
 
 public interface StopService {
-	
-	 /**
+   
+    /**
      * Method to return the created stop Id
      * @param Stop stop 
      * @return stop object
      * @throws CustomException - carry message for the exception
      */
-    int addStop(Stop stop) throws CustomException;
+    public void createStop(Stop stop) throws CustomException;
 
     /**
      * Method to display Stop details
@@ -21,7 +22,7 @@ public interface StopService {
      * @return stop object
      * @throws CustomException - carry message for the exception
      */
-    Stop displayStop(int displayId) throws CustomException;
+    public Stop retrieveStopById(int id) throws CustomException;
 
     /**
      * Method to delete Stop details
@@ -29,12 +30,14 @@ public interface StopService {
      * @return stop object - updated employee details
      * @throws CustomException - carry message for the exception
      */
-    void deleteStop(int deleteId) throws CustomException;
+    public void deleteStop(int id) throws CustomException;
     
     /**
      * Method to return list of all Stops
      * @return stop List
      * @throws CustomException - carry message for the exception
      */
-    List<Stop> displayAllStops() throws CustomException ;
+    public List<Stop> retrieveAllStops() throws CustomException;
+    
+   
 }

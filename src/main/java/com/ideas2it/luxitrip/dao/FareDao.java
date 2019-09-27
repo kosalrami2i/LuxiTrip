@@ -21,14 +21,6 @@ public interface FareDao {
 	 */
     void updateFare(Fare fare)throws CustomException;
     
-    /**
-	 * Method used to delete the given fare from the table 
-	 * @param fareId
-	 * @return the number of affected in table in integer 
-	 * @throws CustomException
-	 */
-	int deleteFare(int fareId) throws CustomException;
-	
 	/**
 	 * Method to get the List of fares in the form of list 
 	 * @return the fare details in list

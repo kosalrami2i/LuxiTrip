@@ -28,15 +28,11 @@ public interface RouteService {
     public Route retrieveRouteById(int id) throws CustomException;
     
     /**
-     * Calls the updateRoute method in DAO class
-     * @param Route pojo Object with the new route details 
-     */
-    public void updateRoute(Route route) throws CustomException;
-    
-    /**
      * Calls the deleteRoute method in the DAO class
      * @param: Route Object which is to be deleted
      */
     public void deleteRoute(int id) throws CustomException;
+    
+    int calculateDistances(int sourceId, int destinationId) throws CustomException;
 
 }

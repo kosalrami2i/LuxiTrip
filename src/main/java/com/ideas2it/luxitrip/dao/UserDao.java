@@ -15,14 +15,6 @@ public interface UserDao {
 	void insertUser(User user) throws CustomException;
 	
 	/**
-	 * Method used to soft delete the User from the database by using the userId 
-	 * @param user
-	 * @return the numberOfRowsAffected count 
-	 * @throws CustomException
-	 */
-    int deleteUser(int userId) throws CustomException;
-	
-	/**
 	 * Method used to update the user detail from the database by using the detail 
 	 * from the user
 	 * @param user
@@ -44,14 +36,7 @@ public interface UserDao {
      * @throws CustomException
      */
     User getUserById(int userId) throws CustomException;
- 
-    /**
-     * Method used to count the number of Users in the database 
-     * @return the users count in long
-     * @throws CustomException
-     */
-    long countUser() throws CustomException;
-    
+
 	 /**
      * Method used to get the User object in the specific user Name
      * @param user name

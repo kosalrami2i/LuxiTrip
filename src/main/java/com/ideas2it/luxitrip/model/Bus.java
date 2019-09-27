@@ -44,7 +44,31 @@ public class Bus {
     @JoinColumn(name="bus_id")
     private List<Seat> seats = new ArrayList<>();
 	
-    public String getType() {
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getBusNumber() {
+		return busNumber;
+	}
+	public void setBusNumber(String busNumber) {
+		this.busNumber = busNumber;
+	}
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	public String getType() {
         return type;
     }
     public void setType(String type) {

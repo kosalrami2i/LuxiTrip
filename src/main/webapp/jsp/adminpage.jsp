@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html >
   <head>
     <script>
@@ -20,7 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="admin.css" />
+    <link type="text/css" rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <title>Admin Page</title>
@@ -42,14 +46,14 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">User Management <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a data-toggle="modal" data-target="#addUserModal" class="title m-b-md">New User</a></li>
-              <li><a href="#">View</a></li>
+              <li><a data-toggle="modal" data-target="#addUserModal" class="title m-b-md">New Driver</a></li>
+              <li><a href="displayUsers">View</a></li>
             </ul>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" onClick="openForm()"><span class="glyphicon glyphicon-user"></span> profile</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </div>
@@ -62,22 +66,22 @@
     </div>
     <div class="modal-body">
     <!-- content goes here -->
-    <form>
+    <form method="post" action="registerBus">
     <div class="form-group">
     <label for="exampleInputEmail1">Bus Number</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" >
+    <input type="text" class="form-control" id="exampleInputEmail1" name="busNumber" pattern = "^[A-Z]{2} [0-9]{2} [A-Z] [0-9]{4}$"/>
     </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Capacity</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" >
+    <input type="text" class="form-control" id="exampleInputPassword1" name="capacity"/>
     </div>
     <div class="form-group">
     <label for="exampleInputFile">Operator</label>
-    <input type="text" class="form-control" id="exampleInputFile" >
+    <input type="text" class="form-control" id="exampleInputFile" name="operator"/>
     </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Type</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" >
+    <input type="text" class="form-control" id="exampleInputEmail1" name="type"/>
     </div>
     <div class="modal-footer">
     <div class="btn-group btn-group-justified" role="group" aria-label="group button">
@@ -103,10 +107,10 @@
     </div>
     <div class="modal-body">
     <!-- content goes here -->
-    <form>
+    <form action="updateBus" method="post">
     <div class="form-group">
     <label for="exampleInputEmail1">Bus Number</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" value="${bus.busNo}">
+    <input type="text" class="form-control" id="exampleInputEmail1" value="${bus.busNumber}">
     </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Capacity</label>
@@ -137,27 +141,25 @@
     <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-    <h1 class="modal-title">Add New User</h1>
+    <h1 class="modal-title">Add New Driver</h1>
     </div>
     <div class="modal-body">
     <!-- content goes here -->
-    <form>
+    <form action="registerUser" method="post">
     <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" >
+    <input type="text" class="form-control" id="exampleInputEmail1" name="name"/>
     </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Mobile</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" >
+    <input type="text" class="form-control" id="exampleInputPassword1" name="number"  pattern = "^[7-9][0-9]{9}$"/>
     </div>
     <div class="form-group">
     <label for="exampleInputFile">Email</label>
-    <input type="text" class="form-control" id="exampleInputFile" required="false" >
+    <input type="email" class="form-control" id="exampleInputFile" required="false" name="emailId"/>
     </div>
-    <div class="form-group">
-    <label for="exampleInputEmail1">Role</label>
-    <input type="select" class="form-control" id="exampleInputEmail1" >
-    </div>
+    <input type="hidden" value="Driver" name="password"/>
+    <input type="hidden" value="Driver" name="role"/>
     <div class="modal-footer">
     <div class="btn-group btn-group-justified" role="group" aria-label="group button">
     <div class="btn-group" role="group">
@@ -206,8 +208,7 @@
             </tr>
           </table>
           <center>
-          <button data-toggle="modal" data-target="#displayBusModal" class="button update" >
-          <i class="fa fa-pencil-square-o"></i></button>
+         
           
             
         </fieldset>
@@ -215,19 +216,21 @@
     </c:forEach>
     </div>
     
-    <div class="form-popup" id="myForm" style="display:block:"> 
-            <form action="update" class="form-container">
-              <label><b>User Id</b></label>
-              <input class="form-control" type="text" value="${user.id}" name="userId" readonly>
-              <label><b>Name</b></label>
-              <input class="form-control" type="text" value="${user.name}" name="name" >
-              <label><b>Mobile Number</b></label>
-              <input class="form-control" type="tel" value="${user.number}" name="mobileNumber" >
-              <label><b>Email</b></label>
-              <input class="form-control" type="email" value="${user.emailId}" name="mobileNumber" > 
-              <button type="submit" class="btn">Edit</button>
-              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
-     </div>       
+    <div class="form-popup" id="myForm">
+  <form:form action="updateUser" class="form-container" modelAttribute="user">
+    <label><b>User Id</b></label>
+    <form:input type="text" value="${user.id}" path="id" readonly="true"/>
+    <label><b>Name</b></label>
+    <form:input type="text" value="${user.name}" path="name" />
+
+    <label><b>Mobile Number</b></label>
+    <form:input type="tel" value="${user.number}" path="number"/>
+    <label><b>Email</b></label>
+    <form:input type="email" value="${user.emailId}" path="emailId" /> 
+    <form:input type="hidden" value="${user.role}" path="role"/>
+    <button type="submit" class="btn">Edit</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form:form>
+</div>
   </body>
 </html>

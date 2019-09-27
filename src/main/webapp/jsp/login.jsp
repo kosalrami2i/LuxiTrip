@@ -18,11 +18,11 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                <div id="login" class="animate form">
-                  <form  action="validateUser" autocomplete="on">
+                  <form  action="login" method="post" autocomplete="on">
                      <h1>Log in</h1>
                      <p> 
                         <label for="username" class="uname" >User Name</label>
-                        <input id="username" name="userName" required="required" type="text" placeholder="mymail@mail.com or xxxxxxxxxx"/>
+                        <input id="username" name="userName" required="required" type="text" placeholder="kohn"/>
                      </p>
                      <p> 
                         <label for="password" class="youpasswd">Password </label>
@@ -49,7 +49,7 @@
                   </form>
                </div>
                <div id="register" class="animate form">
-                  <form  action="registerUser" autocomplete="on">
+                  <form  action="registerUser" autocomplete="on" method="post">
                      <h1> Sign up </h1>
                      <p> 
                         <label>Username</label>
@@ -67,12 +67,11 @@
                      <label>Password </label>
                      <input required="required" type="password" name="password" placeholder="X8df!90EO"/>
                      </p>
-                     <center><%if(request.getAttribute("message") != null) {%>
-        <%=request.getAttribute("message")%></center>
-        <%}%>
+                      <input type="hidden" value="User" name="role"/>
+              
                      
-                     <p class="signin button"> 
-                        <input type="submit" value="Sign up"/> 
+                     <p class="signin button">
+                        <input  type="submit" value="Sign up" /> 
                      </p>
                      <p class="change_link">  
                         Already a member ?

@@ -1,3 +1,4 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
    <meta charset="UTF-8" />
@@ -70,7 +71,7 @@ function closeForm() {
                                 
                                 <strong><h5>Source</h5></strong> 
                                 <span></span>
-                                <input type="text" name="source"  value = "${reservation.fare.source}"/readonly>
+                                <input type="text" name="source"  value = "${reservation.fare.source.name}"/readonly>
                                 
                             </div>
 
@@ -79,7 +80,7 @@ function closeForm() {
                                
                                 <strong><h5>Destination</h5></strong> 
                                 <span></span>
-                                <input type="text" name="destination"  value = "${reservation.fare.destination}"/readonly>
+                                <input type="text" name="destination"  value = "${reservation.fare.destination.name}"/readonly>
                                 
                             </div>
 
@@ -87,12 +88,13 @@ function closeForm() {
 
                         <div class="dates">
                             
-                            <div class="dates">
+                            <div>
                                 
                                 <strong><h5>Seat</h5></strong> 
                                 <span></span>
-                                < c:out value = "${reservation.fare.seatNumber}"/>
-                               
+                                <c:forEach var="seat" items="${reservation.seats}">
+                                	<c:out value = "${seat.seatNumber}"/>
+                                </c:forEach>
                             </div>
                             
                             <div>
@@ -104,12 +106,12 @@ function closeForm() {
                             </div>
                         </div>
 
-                        <div class="">
+                        <div class="d">
 
                             <div>
                                 <strong><h3>Total Cost</h3></strong> 
                                 <span></span>
-                                <input type="text" name="name"  value = "${reservation.total}"/readonly>
+                                <input type="text" name="name"  value = "${reservation.totalPrice}"/readonly>
                             </div>
 
                            <div class="footer">

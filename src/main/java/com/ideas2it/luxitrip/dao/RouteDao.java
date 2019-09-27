@@ -30,13 +30,6 @@ public interface RouteDao {
     public Route getRouteById(int id) throws CustomException;
     
     /**
-     * Replaces the entry with matching route Id with the new data contained 
-     * in the route object
-     * @param Route object to be updated in database table
-     */
-    public void updateRoute(Route route) throws CustomException;
-    
-    /**
      * Deletes the route by setting the status to false
      * @param Route object which is to be deleted
      */

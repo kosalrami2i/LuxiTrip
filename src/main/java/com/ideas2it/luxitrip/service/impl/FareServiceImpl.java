@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 import com.ideas2it.luxitrip.dao.FareDao;
 import com.ideas2it.luxitrip.exception.CustomException;
 import com.ideas2it.luxitrip.model.Fare;
+import com.ideas2it.luxitrip.model.Stop;
 import com.ideas2it.luxitrip.service.FareService;
+import com.ideas2it.luxitrip.service.StopService;
 
 @Service
 public class FareServiceImpl implements FareService {
 	
-	@Autowired
+    @Autowired
 	private FareDao fareDao;
+    @Autowired 
+    private StopService stopService;
 	
     /**
      * Method used to create the Fare details into the database 
@@ -21,6 +25,7 @@ public class FareServiceImpl implements FareService {
      * @throws CustomException
      */
     public void createFare(Fare fare) throws CustomException {
+        fare.setStatus(true);
         fareDao.insertFare(fare);	
     }
     
@@ -30,26 +35,27 @@ public class FareServiceImpl implements FareService {
      * @throw CustomException
      */
     public void updateFare(Fare fare) throws CustomException {
-    	fareDao.updateFare(fare);
+        fareDao.updateFare(fare);
     }
     
-    /**
+    /** 
      * Method used to delete the value of fare by using the id 
      * @param fareId
      * @throws CustomException
      */
     public void deleteFare(int fareId) throws CustomException {
-    	if(0 == fareDao.deleteFare(fareId)) {
-    		throw new CustomException("Unable to delete the Fare details ");
-    	}
+        Fare fare = fareDao.getFareById(fareId);
+        fare.setStatus(false);
+        fareDao.updateFare(fare);
     }
+    
     /**
      * Method used to retrieve the list of fare objects into the database
      * @return the list of fares
      * @throws CustomException
      */
     public List<Fare> retrieveFares() throws CustomException {
-    	return fareDao.getFares();
+        return fareDao.getFares();
     }
     
     /**
@@ -59,7 +65,8 @@ public class FareServiceImpl implements FareService {
      * @throws CustomException
      */
     public Fare retrieveFareById(int id) throws CustomException {
-    	return fareDao.getFareById(id);
+        return fareDao.getFareById(id);
     }
+    
     
 }
