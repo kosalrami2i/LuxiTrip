@@ -61,9 +61,7 @@ public class BusController {
             busService.addSeat(bus,seat1);
             busService.createBus(bus);
             List<Bus> buses = busService.retrieveAllBuses();
-            model.addObject("buses", buses);
-            model.setViewName("adminpage");
-            return model;
+            return new ModelAndView("adminpage", "buses", buses);
         } catch (CustomException exception) {
             return (new ModelAndView("ErrorPage","error",exception));
         }
